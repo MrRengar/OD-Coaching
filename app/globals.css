@@ -1,0 +1,501 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 30% 96%;
+    --foreground: 180 2% 31%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 180 2% 31%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 180 2% 31%;
+
+    --primary: 180 2% 31%;
+    --primary-foreground: 40 30% 96%;
+
+    --secondary: 36 22% 71%;
+    --secondary-foreground: 180 2% 31%;
+
+    --muted: 36 22% 90%;
+    --muted-foreground: 180 2% 45%;
+
+    --accent: 36 22% 71%;
+    --accent-foreground: 180 2% 31%;
+
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 40 30% 96%;
+
+    --border: 36 22% 85%;
+    --input: 36 22% 85%;
+    --ring: 36 22% 71%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 180 2% 15%;
+    --foreground: 36 22% 85%;
+
+    --card: 180 2% 20%;
+    --card-foreground: 36 22% 85%;
+
+    --popover: 180 2% 20%;
+    --popover-foreground: 36 22% 85%;
+
+    --primary: 36 22% 71%;
+    --primary-foreground: 180 2% 15%;
+
+    --secondary: 180 2% 25%;
+    --secondary-foreground: 36 22% 85%;
+
+    --muted: 180 2% 25%;
+    --muted-foreground: 36 22% 65%;
+
+    --accent: 36 22% 45%;
+    --accent-foreground: 36 22% 95%;
+
+    --destructive: 0 60% 40%;
+    --destructive-foreground: 0 85% 97%;
+
+    --border: 180 2% 30%;
+    --input: 180 2% 30%;
+    --ring: 36 22% 60%;
+  }
+}
+
+body {
+  @apply bg-background text-foreground;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 3D Transform Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.rotate-x-1 {
+  transform: rotateX(1deg);
+}
+
+.rotate-y-1 {
+  transform: rotateY(1deg);
+}
+
+.rotate-x-5 {
+  transform: rotateX(5deg);
+}
+
+.rotate-y-5 {
+  transform: rotateY(5deg);
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Shine effect */
+@keyframes shine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Yazı animasyonu için yeni keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  animation: shine 8s infinite;
+  pointer-events: none;
+}
+
+/* Gradient text - yeni renk paleti */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-500 to-sand-400;
+}
+
+/* 3D metin efekti ve daha belirgin gölge */
+.text-3d {
+  text-shadow:
+    1px 1px 0 rgba(75, 81, 81, 0.2),
+    2px 2px 0 rgba(75, 81, 81, 0.2),
+    3px 3px 0 rgba(75, 81, 81, 0.2),
+    4px 4px 0 rgba(75, 81, 81, 0.2),
+    5px 5px 10px rgba(75, 81, 81, 0.4);
+  transform: perspective(500px) rotateX(5deg);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.dark .text-3d {
+  text-shadow:
+    1px 1px 0 rgba(200, 183, 160, 0.2),
+    2px 2px 0 rgba(200, 183, 160, 0.2),
+    3px 3px 0 rgba(200, 183, 160, 0.2),
+    4px 4px 0 rgba(200, 183, 160, 0.2),
+    5px 5px 10px rgba(200, 183, 160, 0.4);
+}
+
+.text-3d:hover {
+  transform: perspective(500px) rotateX(0deg);
+}
+
+/* Sağdan vuran gölge efekti */
+.text-shadow-right {
+  text-shadow: 2px 2px 4px rgba(75, 81, 81, 0.2);
+}
+
+.dark .text-shadow-right {
+  text-shadow: 2px 2px 4px rgba(200, 183, 160, 0.2);
+}
+
+/* Button glow effect */
+.button-glow {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.button-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(75, 81, 81, 0.1);
+}
+
+.dark .button-glow:hover {
+  box-shadow: 0 5px 15px rgba(200, 183, 160, 0.1);
+}
+
+/* Dinamik animasyon sınıfları */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-in-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Hover efektleri */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(75, 81, 81, 0.1), 0 8px 10px -6px rgba(75, 81, 81, 0.05);
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 10px 25px -5px rgba(200, 183, 160, 0.1), 0 8px 10px -6px rgba(200, 183, 160, 0.05);
+}
+
+/* Gradient arka planlar - yeni renk paleti */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #4b5151, #6a7272);
+}
+
+.bg-gradient-accent {
+  background: linear-gradient(135deg, #c8b7a0, #d8c9b6);
+}
+
+.bg-gradient-cool {
+  background: linear-gradient(135deg, #4b5151, #6a7272);
+}
+
+.bg-gradient-warm {
+  background: linear-gradient(135deg, #c8b7a0, #d8c9b6);
+}
+
+.bg-gradient-hero {
+  background: linear-gradient(135deg, #f3efe9, #e8dfd2);
+}
+
+.dark .bg-gradient-hero {
+  background: linear-gradient(135deg, #2c2f2f, #1a1c1c);
+}
+
+/* Kart stilleri */
+.card-dynamic {
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: 0 4px 6px -1px rgba(75, 81, 81, 0.05), 0 2px 4px -2px rgba(75, 81, 81, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+
+.dark .card-dynamic {
+  background: hsl(var(--card));
+  box-shadow: 0 4px 6px -1px rgba(200, 183, 160, 0.1), 0 2px 4px -2px rgba(200, 183, 160, 0.1);
+}
+
+.card-dynamic:hover {
+  box-shadow: 0 15px 30px -5px rgba(75, 81, 81, 0.08), 0 8px 10px -6px rgba(75, 81, 81, 0.05);
+  transform: translateY(-5px) rotate3d(1, 1, 0, 1deg);
+}
+
+.dark .card-dynamic:hover {
+  box-shadow: 0 15px 30px -5px rgba(200, 183, 160, 0.1), 0 8px 10px -6px rgba(200, 183, 160, 0.1);
+}
+
+/* Smooth Scroll Animations */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.scroll-reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Soft theme colors for dark mode */
+.dark .text-primary {
+  color: hsl(var(--primary) / 0.9);
+}
+
+.dark .text-accent {
+  color: hsl(var(--accent) / 0.9);
+}
+
+.dark .bg-white {
+  background-color: hsl(var(--card));
+}
+
+/* Smooth theme transition */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Scroll ile ilerleyen yazı stilleri */
+.scroll-progress-text {
+  opacity: 0.1;
+  transition: opacity 0.5s ease;
+}
+
+/* Animasyonlu yazı stilleri */
+.animated-text-container {
+  overflow: hidden;
+}
+
+.animated-text-line {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animated-text-line:nth-child(1) {
+  animation: fadeInUp 0.6s ease-out 0.2s forwards;
+}
+
+.animated-text-line:nth-child(2) {
+  animation: fadeInUp 0.6s ease-out 0.6s forwards;
+}
+
+.animated-text-line:nth-child(3) {
+  animation: fadeInUp 0.6s ease-out 1s forwards;
+}
+
+.animated-text-line:nth-child(4) {
+  animation: fadeInUp 0.6s ease-out 1.4s forwards;
+}
+
+.animated-text-subtitle {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out 1.8s forwards;
+}
+
+/* Hero bölümü için özel stiller */
+.hero-section {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #2c2f2f, #1a1c1c);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23c8b7a0' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* Arka plan deseni */
+.bg-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23c8b7a0' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Profil resmi için stil */
+.profile-image {
+  border-radius: 10px;
+  box-shadow: 0 10px 30px -5px rgba(75, 81, 81, 0.2);
+  transition: all 0.3s ease;
+  max-width: 100%;
+  height: auto;
+}
+
+.profile-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px -5px rgba(75, 81, 81, 0.3);
+}
+
+/* Blog kartları için stil */
+.blog-card {
+  transition: all 0.3s ease;
+  border-radius: var(--radius);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px -5px rgba(75, 81, 81, 0.1);
+}
+
+.blog-card-image {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.blog-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card-footer {
+  margin-top: auto;
+}
+
+/* Sayfa içeriğini ortalama */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
